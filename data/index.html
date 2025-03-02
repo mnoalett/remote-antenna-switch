@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ESP Wi-Fi Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  </head>
+  <body>
+    <div class="content">
+      <div class="tab">
+        <button
+          class="tablinks"
+          onclick="handleTabChange(event, 'Antenna')"
+          id="defaultOpen"
+        >
+          Antenna
+        </button>
+        <button class="tablinks" onclick="handleTabChange(event, 'Network')">
+          Network
+        </button>
+        <button class="tablinks" onclick="handleTabChange(event, 'Support')">
+          Support
+        </button>
+      </div>
+
+      <div id="Antenna" class="tabcontent">
+        <div class="content">
+          <h4>Antenna selector <span id="outputState"></span></h4>
+
+          <div class="switch-container">
+            <label for="switch" class="switch-label-left">RF2</label>
+            <label class="switch">
+              <input
+                type="checkbox"
+                name="relay"
+                onchange="handleRelayChange(this)"
+              />
+              <span class="slider round"></span>
+            </label>
+            <label for="switch" class="switch-label-right">RF1</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="Network" class="tabcontent">
+        <fieldset form="network">
+          <legend>Network Settings</legend>
+          <div class="content-left" style="margin-top: 10px">
+            <input type="radio" id="dhcp" name="mode" checked />
+            <label for="dhcp">DHCP</label>
+            <input type="radio" id="static" name="mode" />
+            <label for="static">Static</label><br /><br />
+          </div>
+
+          <div class="form-group">
+            <label for="ip">IP Address:</label>
+            <input
+              type="text"
+              class="ip-address"
+              name="ip"
+              style="width: 60px"
+              value="192"
+              maxlength="3"
+            />
+            .
+            <input
+              type="text"
+              class="ip-address"
+              name="ip"
+              style="width: 60px"
+              value="168"
+              maxlength="3"
+            />
+            .
+            <input
+              type="text"
+              class="ip-address"
+              name="ip"
+              style="width: 60px"
+              value="1"
+              maxlength="3"
+            />
+            .
+            <input
+              type="text"
+              class="ip-address"
+              name="ip"
+              value="5"
+              style="width: 60px"
+              maxlength="3"
+            />
+          </div>
+          <div class="form-group">
+            <label for="gateway">Gateway Address:</label>
+            <input
+              type="text"
+              class="ip-address"
+              name="gw"
+              style="width: 60px"
+              value="192"
+              maxlength="3"
+            />
+            .
+            <input
+              type="text"
+              class="ip-address"
+              name="gw"
+              style="width: 60px"
+              value="168"
+              maxlength="3"
+            />
+            .
+            <input
+              type="text"
+              class="ip-address"
+              name="gw"
+              style="width: 60px"
+              value="1"
+              maxlength="3"
+            />
+            .
+            <input
+              type="text"
+              class="ip-address"
+              name="gw"
+              value="5"
+              style="width: 60px"
+              maxlength="3"
+            />
+          </div>
+          <div class="form-group">
+            <label for="subnet">Subnet Mask:</label>
+            <input
+              type="text"
+              class="ip-address"
+              name="nm"
+              value=""
+              style="width: 60px"
+              maxlength="3"
+            />
+            .
+            <input
+              type="text"
+              class="ip-address"
+              name="nm"
+              value=""
+              style="width: 60px"
+              maxlength="3"
+            />
+            .
+            <input
+              type="text"
+              class="ip-address"
+              name="nm"
+              value=""
+              style="width: 60px"
+              maxlength="3"
+            />
+            .
+            <input
+              type="text"
+              class="ip-address"
+              name="nm"
+              value=""
+              style="width: 60px"
+              maxlength="3"
+            />
+          </div>
+          <div class="content-footer">
+            <input
+              type="button"
+              class="button-scan"
+              onclick="updateNetworkSettings()"
+              value="Save"
+            />
+          </div>
+        </fieldset>
+
+        <fieldset form="wifi">
+          <legend>Wi-Fi</legend>
+          <div class="form-group">
+            <label style="font-size: 14px">Remove WiFi network</label>
+            <input
+              type="button"
+              id="scan"
+              class="button-scan is-danger"
+              value="Delete"
+              onclick="deleteNetworkInfo()"
+            />
+          </div>
+        </fieldset>
+      </div>
+
+      <div id="Support" class="tabcontent">
+        <fieldset form="info">
+          <legend>Info</legend>
+          <div class="form-group">
+            <label>Version:</label>
+            <span id="swvers"></span>
+          </div>
+          <div class="form-group" style="margin-top: 15px">
+            <label>Hardware ID:</label>
+            <span id="hwid"></span>
+          </div>
+        </fieldset>
+
+        <fieldset form="maintenance">
+          <legend>Maintenance</legend>
+          <div class="form-group">
+            <label>Reboot</label>
+            <input
+              type="button"
+              id="scan"
+              class="button-scan"
+              value="Reboot"
+              onclick="doReboot()"
+            />
+          </div>
+          <div class="form-group">
+            <label>Update</label>
+            <input
+              type="button"
+              id="scan"
+              class="button-scan"
+              value="Update"
+              onclick="doUpdate()"
+            />
+          </div>
+        </fieldset>
+      </div>
+
+      <script type="text/javascript" src="js/script.js"></script>
+      <script type="text/javascript">
+        window.onload = async function () {
+          const config = await getConfig();
+          const relay = await getRelayStatus();
+
+          document.querySelector('input[name="relay"]').checked =
+            relay.relay_status === "on";
+          document.getElementById("defaultOpen").click();
+          var radios = document.getElementsByName("mode");
+          radios.forEach(function (radio) {
+            radio.addEventListener("change", toggleIPConfig);
+          });
+          document.querySelector('span[id = "swvers"]').textContent =
+            config.swvers || "-";
+          document.querySelector('span[id = "hwid"]').textContent =
+            config.hwid.replaceAll(":", "") || "-";
+          document.getElementById("dhcp").checked = config.dhcp;
+          document.getElementById("static").checked = !config.dhcp;
+
+          let ipFields = document.getElementsByName("ip");
+          let gatewayFields = document.getElementsByName("gw");
+          let netmaskFields = document.getElementsByName("nm");
+          let ipArray = config.ip.split(".");
+          let gatewayArray = config.gateway.split(".");
+          let netmaskArray = config.netmask.split(".");
+
+          ipFields.forEach((field, index) => {
+            field.value = ipArray[index];
+          });
+          gatewayFields.forEach((field, index) => {
+            field.value = gatewayArray[index];
+          });
+          netmaskFields.forEach((field, index) => {
+            field.value = netmaskArray[index];
+          });
+          toggleIPConfig();
+        };
+      </script>
+    </div>
+  </body>
+</html>

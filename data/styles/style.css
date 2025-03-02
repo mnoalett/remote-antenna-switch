@@ -1,0 +1,411 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  display: inline-block;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: white;
+}
+
+p {
+  font-size: 1.4rem;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #0a1128;
+}
+
+body {
+  margin: 0;
+}
+
+.content {
+  width: 50%;
+  margin: 0 auto;
+  padding: 2%;
+}
+
+.card-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card {
+  background-color: white;
+  box-shadow: 2px 2px 12px 1px rgba(140, 140, 140, 0.5);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #034078;
+}
+
+.is-danger {
+  background-color: rgb(255, 170, 1);
+  color: #fff;
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+input:disabled {
+  background-color: #eceaea;
+}
+
+input[type="submit"] {
+  border: none;
+  color: #fefcfb;
+  background-color: #034078;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 100px;
+  margin-right: 10px;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+}
+
+input[type="submit"]:hover {
+  background-color: #1282a2;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 18px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 100px;
+  margin: 5px;
+}
+
+.ip-address {
+  display: flex;
+  flex-wrap: nowrap;
+  /* Prevent inputs from wrapping */
+  align-items: center;
+  /* Align items vertically centered */
+}
+
+/* Individual IP input field */
+.ip-address input {
+  width: 60px;
+  /* Adjust width as needed */
+  margin-right: 5px;
+  /* Add some spacing between inputs */
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+  .ip-address {
+    flex-wrap: nowrap;
+    /* Keep inputs in the same row */
+    justify-content: space-between;
+    /* Add spacing between the inputs */
+  }
+
+  .ip-address input {
+    width: 60px;
+    /* Reduce width for smaller screens */
+  }
+}
+
+label {
+  text-align: left;
+}
+
+.value {
+  font-size: 1.2rem;
+  color: #1282a2;
+}
+
+.state {
+  font-size: 1.2rem;
+  color: #1282a2;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch-label-right {
+  width: auto;
+}
+
+.switch-label-left {
+  width: auto;
+  text-align: right;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.button-action {
+  border: none;
+  color: #030731;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100px;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: #adadad;
+}
+
+.button-scan {
+  height: 40px;
+  width: 100px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  border: none;
+  font-weight: bold;
+  margin-right: 2px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.network-select {
+  width: 250px;
+  height: 40px;
+  padding: 0;
+  font-size: 12px;
+}
+
+input[type="button"]:hover {
+  background-color: #adadad;
+}
+
+/* Styling for form elements */
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-left {
+  text-align: left;
+}
+
+.content-footer {
+  text-align: right;
+  margin-top: 20px;
+}
+
+fieldset {
+  margin-top: 15px;
+}
+
+legend {
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 10px;
+  width: 40%;
+  /* Set width for labels */
+}
+
+/* Styling for the IP config section */
+#ipconfig {
+  display: block;
+}
+
+select {
+  color: grey;
+}
+
+option {
+  color: black;
+}
+
+option[default] {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .switch-container {
+    flex-direction: column; /* Stack labels and switch vertically */
+    align-items: center; /* Center align the switch and labels */
+  }
+
+  .switch-label-left,
+  .switch-label-right {
+    flex: 0; /* Prevent labels from stretching */
+    margin-bottom: 10px; /* Add spacing between labels and switch */
+  }
+
+  .switch {
+    margin: 10px 0; /* Add spacing around the switch */
+  }
+}
+
+/* Responsive layout for small screens */
+@media (max-width: 767px) {
+  .tab {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tablinks {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .form-group {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  input[type="text"] {
+    width: 60px;
+  }
+
+  .button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* For tablets and larger devices (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 800px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  input[type="text"] {
+    width: 120px;
+  }
+
+  .tablinks {
+    font-size: 14px;
+  }
+}

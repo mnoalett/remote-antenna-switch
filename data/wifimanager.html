@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Antenna Switch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <h1>Antenna Switch</h1>
+    </div>
+
+    <div class="content">
+      <h3>Connect device to your Wi-Fi</h3>
+      <p style="font-size: 12px">
+        sw vers:
+        <span id="swvers" style="font-weight: bold; margin-right: 15px"></span>
+        hw id:
+        <span id="hwid" style="font-weight: bold"></span>
+      </p>
+      <fieldset form="wifi-config">
+        <legend>Wi-Fi Settings</legend>
+
+        <div class="form-group">
+          <label for="ssid">SSID:</label>
+          <div class="network-container">
+            <select class="network-select" onchange="handleNetworkChange(this)">
+              <option value="" disabled selected hidden>
+                Select a network
+              </option>
+            </select>
+            <input
+              type="button"
+              id="scan"
+              class="button-scan"
+              value="scan"
+              onclick="getWifiNetworks()"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="pass">Password:</label>
+          <input
+            type="text"
+            id="pass"
+            name="pass"
+            minlength="8"
+            style="width: 250px"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label></label>
+        </div>
+      </fieldset>
+
+      <fieldset form="network">
+        <legend>Network Settings</legend>
+        <div class="content-left" style="margin-top: 10px">
+          <input type="radio" id="dhcp" name="mode" checked />
+          <label for="dhcp">DHCP</label>
+          <input type="radio" id="static" name="mode" />
+          <label for="static">Static</label><br /><br />
+        </div>
+
+        <div class="form-group">
+          <label for="ip">IP Address:</label>
+          <input
+            type="text"
+            class="ip-address"
+            name="ip"
+            style="width: 60px"
+            value=""
+            maxlength="3"
+          />
+          .
+          <input
+            type="text"
+            class="ip-address"
+            name="ip"
+            style="width: 60px"
+            value=""
+            maxlength="3"
+          />
+          .
+          <input
+            type="text"
+            class="ip-address"
+            name="ip"
+            style="width: 60px"
+            value=""
+            maxlength="3"
+          />
+          .
+          <input
+            type="text"
+            class="ip-address"
+            name="ip"
+            value=""
+            style="width: 60px"
+            maxlength="3"
+          />
+        </div>
+        <div class="form-group">
+          <label for="gateway">Gateway Address:</label>
+          <input
+            type="text"
+            class="ip-address"
+            name="gw"
+            style="width: 60px"
+            value=""
+            maxlength="3"
+          />
+          .
+          <input
+            type="text"
+            class="ip-address"
+            name="gw"
+            style="width: 60px"
+            value=""
+            maxlength="3"
+          />
+          .
+          <input
+            type="text"
+            class="ip-address"
+            name="gw"
+            style="width: 60px"
+            value=""
+            maxlength="3"
+          />
+          .
+          <input
+            type="text"
+            class="ip-address"
+            name="gw"
+            value=""
+            style="width: 60px"
+            maxlength="3"
+          />
+        </div>
+        <div class="form-group">
+          <label for="netmask">Netmask:</label>
+          <input
+            type="text"
+            class="ip-address"
+            name="nm"
+            value=""
+            style="width: 60px"
+            maxlength="3"
+          />
+          .
+          <input
+            type="text"
+            class="ip-address"
+            name="nm"
+            value=""
+            style="width: 60px"
+            maxlength="3"
+          />
+          .
+          <input
+            type="text"
+            class="ip-address"
+            name="nm"
+            value=""
+            style="width: 60px"
+            maxlength="3"
+          />
+          .
+          <input
+            type="text"
+            class="ip-address"
+            name="nm"
+            value=""
+            style="width: 60px"
+            maxlength="3"
+          />
+        </div>
+      </fieldset>
+
+      <div class="content-footer">
+        <input
+          type="button"
+          onclick="save()"
+          value="save"
+          class="button-scan"
+        />
+      </div>
+    </div>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript">
+      window.onload = async function () {
+        var radios = document.getElementsByName("mode");
+        radios.forEach(function (radio) {
+          radio.addEventListener("change", toggleIPConfig);
+        });
+
+        const config = await getConfig();
+        document.getElementById("swvers").textContent = config.swvers;
+        document.getElementById("hwid").textContent = config.hwid.replaceAll(
+          ":",
+          ""
+        );
+        getWifiNetworks();
+        toggleIPConfig();
+      };
+    </script>
+  </body>
+</html>
