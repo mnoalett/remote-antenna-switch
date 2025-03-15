@@ -74,6 +74,6 @@ This API allows OpenWebRX and other external applications to dynamically control
 
 ## OpenWebRX Integration
 
-You can find the modified OpenWebRX antenna switch plugin at https://github.com/mnoalett/owrxantennaswitcher
+You can find the modified OpenWebRX antenna switch plugin at https://github.com/mnoalett/owrxantswitcher
 
 ##
