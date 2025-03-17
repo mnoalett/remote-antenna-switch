@@ -203,6 +203,10 @@
             <label>Hardware ID:</label>
             <span id="hwid"></span>
           </div>
+        <div class="form-group" style="margin-top: 15px">
+          <label>Uptime:</label>
+          <span id="uptime"></span>
+        </div>
         </fieldset>
 
         <fieldset form="maintenance">
@@ -247,6 +251,7 @@
             config.swvers || "-";
           document.querySelector('span[id = "hwid"]').textContent =
             config.hwid.replaceAll(":", "") || "-";
+        document.querySelector('span[id = "uptime"]').textContent = formatUptime(config.uptime);
           document.getElementById("dhcp").checked = config.dhcp;
           document.getElementById("static").checked = !config.dhcp;
 

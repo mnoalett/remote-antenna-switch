@@ -185,6 +185,7 @@ void WebServerManager::handleGetConfiguration(AsyncWebServerRequest *request)
   JsonDocument doc;
   doc["swvers"] = SWVERS;
   doc["hwid"] = WiFi.macAddress();
+  doc["uptime"] = millis();
   doc["dhcp"] = configManager.isDHCPEnabled();
   doc["ip"] = configManager.getIP();
   doc["gateway"] = configManager.getGateway();

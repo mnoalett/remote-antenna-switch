@@ -177,3 +177,11 @@ async function getWifiNetworks() {
     selectTag.append(opt);
   });
 }
+
+function formatUptime(milliseconds) {
+  const days = Math.floor(milliseconds / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((milliseconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((milliseconds % (1000 * 60 * 6)) / (1000 * 60));
+
+  return `${days}d ${hours}h ${minutes}m`;
+}
